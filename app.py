@@ -26,7 +26,13 @@ st.title("엑셀 텍스트 편집기")
 
 uploaded_file = st.file_uploader("엑셀 파일 업로드", type=["xlsx", "xls"])
 
+# apply 버튼 눌림 정보
+st.session_state.numbered = False
 
+# 텍스트 입력 및 출력
+def number_reload():
+    st.session_state.numbered = True
+        
 
 if uploaded_file is not None:
     df = pd.read_excel(uploaded_file).fillna("")
@@ -35,7 +41,9 @@ if uploaded_file is not None:
     if "df_to_download" not in st.session_state:
         st.session_state.df_to_download = pd.read_excel(uploaded_file).fillna("")
 
-    number = st.number_input('Insert a row number', min_value=1, step = 1, max_value = len(df.values))
+    number = st.number_input('Insert a row number', min_value=1, step = 1, max_value = len(df.values), on_change = number_reload)
+
+
     
     
     origin = st.session_state.df_to_download['원문'][number-1].strip()
@@ -63,7 +71,10 @@ if uploaded_file is not None:
 
     # 텍스트 입력 및 출력
     def reload(key):
-        st.session_state[key] = key_dict[key]
+        if st.session_state.numbered == True:
+            st.session_state[key] = key_dict[key]
+        else:
+            st.session_state.numbered = False
     
     
     input_text0 = col_ls[0].text_area('원문', value = origin, placeholder='please copy and paste' ,height=1500, key = 1)
@@ -93,6 +104,10 @@ if uploaded_file is not None:
     
     
     if col_buttons[0].button('Apply'):
+
+        st.session_state.applied = True
+
+        # key_dict = {2:input_text1, 3:input_text2, 4:input_text3, 5:input_text4, 6:input_text5, 7:input_text6, 8:input_text7, 9:to_pass, 10:not_matched}
         
         st.session_state.df_to_download['원문'][number-1] = input_text0
         st.session_state.df_to_download['인사말'][number-1] = input_text1
