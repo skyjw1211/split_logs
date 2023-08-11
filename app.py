@@ -80,60 +80,23 @@ if uploaded_file is not None:
     
     input_text0 = col_ls[0].text_area('**원문**', value = origin, placeholder='please copy and paste' ,height=1500, key = 1)
 
-    opening_on = col_ls[1].checkbox('**인사말 on:ballot_box_with_check:**', key = 21, value = False)
-    if opening != '' or opening_on == True:
-        input_text1 = col_ls[1].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = 2, on_change=reload, args = [2])
-    else:
-        input_text1 = ''
+    input_text1 = col_ls[1].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = str(2)+ f'{number-1}', on_change=reload, args = [2])
 
-    main1_on = col_ls[1].checkbox('**본문1 on:ballot_box_with_check:**', key = 31, value = False)
-    if main1 != '' or main1_on == True:
-        input_text2 = col_ls[1].text_area('**본문:one:**', value = main1, placeholder='please copy and paste', height=100, key = 3, on_change=reload, args = [3])
-    else:
-        input_text2 = ''
-
-    main2_on = col_ls[1].checkbox('**본문2 on:ballot_box_with_check:**', key = 41, value = False)
-    if main2 != '' or main2_on == True:
-        input_text3 = col_ls[1].text_area('**본문:two:**', value = main2, placeholder='please copy and paste', height=100, key = 4, on_change=reload, args = [4])
-    else:
-        input_text3 = ''
+    input_text2 = col_ls[1].text_area('**본문:one:**', value = main1, placeholder='please copy and paste', height=100, key = str(3)+ f'{number-1}', on_change=reload, args = [3])
 
 
-    main3_on = col_ls[1].checkbox('**본문3 on:ballot_box_with_check:**', key = 51, value = False)
-    if main3 != '' or main3_on == True:
-        input_text4 = col_ls[1].text_area('**본문:three:**', value = main3, placeholder='please copy and paste', height=100, key = 5, on_change=reload, args = [5])
-    else:
-        input_text4 = ''
+    input_text3 = col_ls[1].text_area('**본문:two:**', value = main2, placeholder='please copy and paste', height=100, key = str(4)+ f'{number-1}', on_change=reload, args = [4])
+    input_text4 = col_ls[1].text_area('**본문:three:**', value = main3, placeholder='please copy and paste', height=100, key = str(5)+ f'{number-1}', on_change=reload, args = [5])
+    input_text5 = col_ls[1].text_area('**본문:four:**', value = main4, placeholder='please copy and paste', height=100, key = str(6)+ f'{number-1}', on_change=reload, args = [6])
+
     
-    main4_on = col_ls[1].checkbox('**본문4 on:ballot_box_with_check:**', key = 61, value = False)
-    if main4 != '' or main4_on == True:
-        input_text5 = col_ls[1].text_area('**본문:four:**', value = main4, placeholder='please copy and paste', height=100, key = 6, on_change=reload, args = [6])
-    else:
-        input_text5 = ''
-    
-    main5_on = col_ls[1].checkbox('**본문5 on:ballot_box_with_check:**', key = 71, value = False)
-    if main5 != '' or main5_on == True:
-        input_text6 = col_ls[1].text_area('**본문:five:**', value = main5, placeholder='please copy and paste', height=100, key = 7, on_change=reload, args = [7])
-    else:
-        input_text6 = ''
+    input_text6 = col_ls[1].text_area('**본문:five:**', value = main5, placeholder='please copy and paste', height=100, key = str(7)+ f'{number-1}', on_change=reload, args = [7])
+    input_text7 = col_ls[1].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = str(8)+ f'{number-1}', on_change=reload, args = [8])
+    to_pass = col_ls[1].text_area('**PASS:parking:**', value = pass_value, height=10, key = str(9) + f'{number-1}', on_change=reload, args = [9])
 
-    closing_on = col_ls[1].checkbox('**맺음말 on:ballot_box_with_check:**', key = 81, value = False)
-    if closing != '' or closing_on == True:
-        input_text7 = col_ls[1].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = 8, on_change=reload, args = [8])
-    else:
-        input_text7 = ''
-
-    pass_on = col_ls[1].checkbox('**PASS on:ballot_box_with_check:**', key = 91, value = False)
-    if pass_value != '' or pass_on == True:
-        to_pass = col_ls[1].text_area('**PASS:parking:**', value = pass_value, height=10, key = 9, on_change=reload, args = [9])
-    else:
-        to_pass = ''
     
-    not_matched_on = col_ls[1].checkbox('**not_matched on:ballot_box_with_check:**', key = 101, value = False)
-    if not_matched_value != '' or not_matched_on == True:
-        not_matched = col_ls[1].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
-    else:
-        not_matched = ''
+    not_matched = col_ls[1].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
+
 
     # col_ls[1].session_state[91] = False
     
