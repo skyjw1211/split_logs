@@ -58,7 +58,7 @@ if uploaded_file is not None:
     pass_value = str(st.session_state.df_to_download['PASS'][number-1]).strip()
     not_matched_value = str(st.session_state.df_to_download['본문-맺음말 안 맞음'][number-1]).strip()
 
-    print(opening, main1, main2, main3, main4, main5, closing, pass_value, not_matched_value)
+    # print(opening, main1, main2, main3, main4, main5, closing, pass_value, not_matched_value)
     
 
     # try:
@@ -77,24 +77,65 @@ if uploaded_file is not None:
             st.session_state.numbered = False
     
     
-    input_text0 = col_ls[0].text_area('원문', value = origin, placeholder='please copy and paste' ,height=1500, key = 1)
-
-    input_text1 = col_ls[1].text_area('인사말', value = opening, placeholder='please copy and paste', height=100, key = 2, on_change=reload, args = [2])
-
-    input_text2 = col_ls[1].text_area('본문1', value = main1, placeholder='please copy and paste', height=100, key = 3, on_change=reload, args = [3])
-
-    input_text3 = col_ls[1].text_area('본문2', value = main2, placeholder='please copy and paste', height=100, key = 4, on_change=reload, args = [4])
-
-    input_text4 = col_ls[1].text_area('본문3', value = main3, placeholder='please copy and paste', height=100, key = 5, on_change=reload, args = [5])
-
-    input_text5 = col_ls[1].text_area('본문4', value = main4, placeholder='please copy and paste', height=100, key = 6, on_change=reload, args = [6])
     
-    input_text6 = col_ls[1].text_area('본문5', value = main5, placeholder='please copy and paste', height=100, key = 7, on_change=reload, args = [7])
+    input_text0 = col_ls[0].text_area('**원문**', value = origin, placeholder='please copy and paste' ,height=1500, key = 1)
 
-    input_text7 = col_ls[1].text_area('맺음말', value = closing, placeholder='please copy and paste', height=100, key = 8, on_change=reload, args = [8])
+    opening_on = col_ls[1].checkbox('**인사말 on:ballot_box_with_check:**', key = 21, value = False)
+    if opening != '' or opening_on == True:
+        input_text1 = col_ls[1].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = 2, on_change=reload, args = [2])
+    else:
+        input_text1 = ''
 
-    to_pass = col_ls[1].text_area('PASS', value = pass_value, height=10, key = 9, on_change=reload, args = [9])
-    not_matched = col_ls[1].text_area('본문-맺음말 안 맞음', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
+    main1_on = col_ls[1].checkbox('**본문1 on:ballot_box_with_check:**', key = 31, value = False)
+    if main1 != '' or main1_on == True:
+        input_text2 = col_ls[1].text_area('**본문:one:**', value = main1, placeholder='please copy and paste', height=100, key = 3, on_change=reload, args = [3])
+    else:
+        input_text2 = ''
+
+    main2_on = col_ls[1].checkbox('**본문2 on:ballot_box_with_check:**', key = 41, value = False)
+    if main2 != '' or main2_on == True:
+        input_text3 = col_ls[1].text_area('**본문:two:**', value = main2, placeholder='please copy and paste', height=100, key = 4, on_change=reload, args = [4])
+    else:
+        input_text3 = ''
+
+
+    main3_on = col_ls[1].checkbox('**본문3 on:ballot_box_with_check:**', key = 51, value = False)
+    if main3 != '' or main3_on == True:
+        input_text4 = col_ls[1].text_area('**본문:three:**', value = main3, placeholder='please copy and paste', height=100, key = 5, on_change=reload, args = [5])
+    else:
+        input_text4 = ''
+    
+    main4_on = col_ls[1].checkbox('**본문4 on:ballot_box_with_check:**', key = 61, value = False)
+    if main4 != '' or main4_on == True:
+        input_text5 = col_ls[1].text_area('**본문:four:**', value = main4, placeholder='please copy and paste', height=100, key = 6, on_change=reload, args = [6])
+    else:
+        input_text5 = ''
+    
+    main5_on = col_ls[1].checkbox('**본문5 on:ballot_box_with_check:**', key = 71, value = False)
+    if main5 != '' or main5_on == True:
+        input_text6 = col_ls[1].text_area('**본문:five:**', value = main5, placeholder='please copy and paste', height=100, key = 7, on_change=reload, args = [7])
+    else:
+        input_text6 = ''
+
+    closing_on = col_ls[1].checkbox('**맺음말 on:ballot_box_with_check:**', key = 81, value = False)
+    if closing != '' or closing_on == True:
+        input_text7 = col_ls[1].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = 8, on_change=reload, args = [8])
+    else:
+        input_text7 = ''
+
+    pass_on = col_ls[1].checkbox('**PASS on:ballot_box_with_check:**', key = 91, value = False)
+    if pass_value != '' or pass_on == True:
+        to_pass = col_ls[1].text_area('**PASS:parking:**', value = pass_value, height=10, key = 9, on_change=reload, args = [9])
+    else:
+        to_pass = ''
+    
+    not_matched_on = col_ls[1].checkbox('**not_matched on:ballot_box_with_check:**', key = 101, value = False)
+    if not_matched_value != '' or not_matched_on == True:
+        not_matched = col_ls[1].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
+    else:
+        not_matched = ''
+
+    # col_ls[1].session_state[91] = False
     
     
     df_xlsx = to_excel(st.session_state.df_to_download)
@@ -118,7 +159,7 @@ if uploaded_file is not None:
         st.session_state.df_to_download['본문5'][number-1] = input_text6
         st.session_state.df_to_download['맺음말'][number-1] = input_text7
         st.session_state.df_to_download['PASS'][number-1] = to_pass
-        st.session_state.df_to_download['본문-맺음말 안 맞음'][number-1] = not_matched
+        st.session_state.df_to_download['본문-맺음말 안 맞음'][number-1] = not_matched_value
 
 
 
