@@ -67,7 +67,7 @@ if uploaded_file is not None:
 
 
     col_buttons = st.columns(3)
-    col_ls = st.columns(2)
+    col_ls = st.columns(3)
 
     # 텍스트 입력 및 출력
     def reload(key):
@@ -76,26 +76,29 @@ if uploaded_file is not None:
         else:
             st.session_state.numbered = False
     
+    # def markdown(key):
+    #     col_ls[1].write(st.session_state[key])
     
     
-    input_text0 = col_ls[0].text_area('**원문**', value = origin, placeholder='please copy and paste' ,height=1500, key = 1)
+    
+    input_text0 = col_ls[0].text_area('**원문**', value = origin, placeholder='please copy and paste' ,height=1500, key = 1) #on_change=markdown, args = [1]
+    col_ls[1].write(st.session_state[1])
 
-    input_text1 = col_ls[1].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = str(2)+ f'{number-1}', on_change=reload, args = [2])
+    input_text1 = col_ls[2].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = str(2)+ f'{number-1}', on_change=reload, args = [2])
 
-    input_text2 = col_ls[1].text_area('**본문:one:**', value = main1, placeholder='please copy and paste', height=100, key = str(3)+ f'{number-1}', on_change=reload, args = [3])
+    input_text2 = col_ls[2].text_area('**본문:one:**', value = main1, placeholder='please copy and paste', height=100, key = str(3)+ f'{number-1}', on_change=reload, args = [3])
 
 
-    input_text3 = col_ls[1].text_area('**본문:two:**', value = main2, placeholder='please copy and paste', height=100, key = str(4)+ f'{number-1}', on_change=reload, args = [4])
-    input_text4 = col_ls[1].text_area('**본문:three:**', value = main3, placeholder='please copy and paste', height=100, key = str(5)+ f'{number-1}', on_change=reload, args = [5])
-    input_text5 = col_ls[1].text_area('**본문:four:**', value = main4, placeholder='please copy and paste', height=100, key = str(6)+ f'{number-1}', on_change=reload, args = [6])
+    input_text3 = col_ls[2].text_area('**본문:two:**', value = main2, placeholder='please copy and paste', height=100, key = str(4)+ f'{number-1}', on_change=reload, args = [4])
+    input_text4 = col_ls[2].text_area('**본문:three:**', value = main3, placeholder='please copy and paste', height=100, key = str(5)+ f'{number-1}', on_change=reload, args = [5])
+    input_text5 = col_ls[2].text_area('**본문:four:**', value = main4, placeholder='please copy and paste', height=100, key = str(6)+ f'{number-1}', on_change=reload, args = [6])
 
     
-    input_text6 = col_ls[1].text_area('**본문:five:**', value = main5, placeholder='please copy and paste', height=100, key = str(7)+ f'{number-1}', on_change=reload, args = [7])
-    input_text7 = col_ls[1].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = str(8)+ f'{number-1}', on_change=reload, args = [8])
-    to_pass = col_ls[1].text_area('**PASS:parking:**', value = pass_value, height=10, key = str(9) + f'{number-1}', on_change=reload, args = [9])
+    input_text6 = col_ls[2].text_area('**본문:five:**', value = main5, placeholder='please copy and paste', height=100, key = str(7)+ f'{number-1}', on_change=reload, args = [7])
+    input_text7 = col_ls[2].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = str(8)+ f'{number-1}', on_change=reload, args = [8])
 
-    
-    not_matched = col_ls[1].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
+    to_pass = col_ls[2].text_area('**PASS:parking:**', value = pass_value, height=10, key = str(9) + f'{number-1}', on_change=reload, args = [9])
+    not_matched = col_ls[2].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height=10, key = 10, on_change=reload, args = [10])
 
 
     # col_ls[1].session_state[91] = False
@@ -113,7 +116,7 @@ if uploaded_file is not None:
 
         # key_dict = {2:input_text1, 3:input_text2, 4:input_text3, 5:input_text4, 6:input_text5, 7:input_text6, 8:input_text7, 9:to_pass, 10:not_matched}
         
-        st.session_state.df_to_download['원문'][number-1] = input_text0
+        # st.session_state.df_to_download['원문'][number-1] = input_text0
         st.session_state.df_to_download['인사말'][number-1] = input_text1
         st.session_state.df_to_download['본문1'][number-1] = input_text2
         st.session_state.df_to_download['본문2'][number-1] = input_text3
