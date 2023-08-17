@@ -98,7 +98,7 @@ if uploaded_file is not None:
     input_text7 = col_ls[2].text_area('**맺음말:end:**', value = closing, placeholder='please copy and paste', height=100, key = str(8)+ f'{number-1}', on_change=reload, args = [8])
 
     to_pass = col_ls[2].text_area('**PASS:parking:**', value = pass_value, height=10, key = str(9) + f'{number-1}', on_change=reload, args = [9])
-    not_matched = col_ls[2].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height= 10, key = str(10) + f'{number-1}', on_change=reload, args = [10])
+    not_matched_value = col_ls[2].text_area('**본문-맺음말 안 맞음:no_entry_sign:**', value = not_matched_value, height= 10, key = str(10) + f'{number-1}', on_change=reload, args = [10])
 
 
     # col_ls[1].session_state[91] = False
