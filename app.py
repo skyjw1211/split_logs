@@ -1,6 +1,8 @@
 import streamlit as st
 import pandas as pd
 from io import BytesIO
+import re
+# import streamlit.components.v1 as components
 
 # excel 파일 읽어오기
 
@@ -14,7 +16,7 @@ def to_excel(df):
     df.to_excel(writer, index=False, sheet_name='Sheet1')
     workbook = writer.book
     worksheet = writer.sheets['Sheet1']
-    format1 = workbook.add_format({'num_format': '0.00'}) 
+    format1 = workbook.add_format({'num_format': '0'}) 
     worksheet.set_column('A:A', None, format1)  
     writer.close()
     # writer.save()
@@ -75,6 +77,13 @@ if uploaded_file is not None:
             st.session_state[key] = key_dict[key]
         else:
             st.session_state.numbered = False
+
+    def change2html(text):
+        text = text.replace('\n', '<br>')
+        text = re.sub('<br># ([0-9ㅇㅁ])<br>', '<br><h1># \g<1></h1><br>', text)
+        res = text
+        res = f'<html>{res}</html>'
+        return res
     
     # def markdown(key):
     #     col_ls[1].write(st.session_state[key])
@@ -82,7 +91,9 @@ if uploaded_file is not None:
     
     col_ls[1].markdown(st.session_state.df_to_download['url'][number-1])
     input_text0 = col_ls[0].text_area('**원문**', value = origin, placeholder='please copy and paste' ,height=1500, key = 1) #on_change=markdown, args = [1]
-    col_ls[1].markdown(st.session_state[1])
+    # col_ls[1].markdown(st.session_state[1])
+    col_ls[1].markdown(change2html(st.session_state[1]), unsafe_allow_html=True)
+    # col_ls[1].write(change2html(st.session_state[1]))
 
     input_text1 = col_ls[2].text_area('**인사말:wave:**', value = opening, placeholder='please copy and paste', height=100, key = str(2)+ f'{number-1}', on_change=reload, args = [2])
 
@@ -117,13 +128,13 @@ if uploaded_file is not None:
         # key_dict = {2:input_text1, 3:input_text2, 4:input_text3, 5:input_text4, 6:input_text5, 7:input_text6, 8:input_text7, 9:to_pass, 10:not_matched}
         
         # st.session_state.df_to_download['원문'][number-1] = input_text0
-        st.session_state.df_to_download['인사말'][number-1] = input_text1
-        st.session_state.df_to_download['본문1'][number-1] = input_text2
-        st.session_state.df_to_download['본문2'][number-1] = input_text3
-        st.session_state.df_to_download['본문3'][number-1] = input_text4
-        st.session_state.df_to_download['본문4'][number-1] = input_text5
-        st.session_state.df_to_download['본문5'][number-1] = input_text6
-        st.session_state.df_to_download['맺음말'][number-1] = input_text7
+        st.session_state.df_to_download['인사말'][number-1] = input_text1.strip()
+        st.session_state.df_to_download['본문1'][number-1] = input_text2.strip()
+        st.session_state.df_to_download['본문2'][number-1] = input_text3.strip()
+        st.session_state.df_to_download['본문3'][number-1] = input_text4.strip()
+        st.session_state.df_to_download['본문4'][number-1] = input_text5.strip()
+        st.session_state.df_to_download['본문5'][number-1] = input_text6.strip()
+        st.session_state.df_to_download['맺음말'][number-1] = input_text7.strip()
         st.session_state.df_to_download['PASS'][number-1] = to_pass
         st.session_state.df_to_download['본문-맺음말 안 맞음'][number-1] = not_matched_value
 
